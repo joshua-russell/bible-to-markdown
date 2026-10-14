@@ -143,7 +143,8 @@ describe('Bible Parser', () => {
   });
 
   describe('getVersionHtml', () => {
-    it('should return NET version for NET parser', () => {
+    // The API puts the requested translation (bible1Translation) in bible1
+    it('should return bible1 for NET parser', () => {
       const netParser = createParser('NET');
       const netHtml = '<div>NET content</div>';
       const nasbHtml = '<div>NASB content</div>';
@@ -153,12 +154,12 @@ describe('Bible Parser', () => {
       expect(result).toBe(netHtml);
     });
 
-    it('should return NASB version for NASB parser', () => {
+    it('should return bible1 for NASB parser', () => {
       const nasbParser = createParser('NASB');
-      const netHtml = '<div>NET content</div>';
       const nasbHtml = '<div>NASB content</div>';
+      const netHtml = '<div>NET content</div>';
 
-      const result = nasbParser.getVersionHtml(netHtml, nasbHtml);
+      const result = nasbParser.getVersionHtml(nasbHtml, netHtml);
 
       expect(result).toBe(nasbHtml);
     });

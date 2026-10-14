@@ -2,7 +2,7 @@ import * as cheerio from 'cheerio';
 import { BibleVersion, ParsedChapter, ParsedSection, ParsedVerse } from '../types/index.js';
 
 export class BibleParser {
-  private version: BibleVersion;
+  readonly version: BibleVersion;
 
   constructor(version: BibleVersion) {
     this.version = version;
@@ -163,8 +163,10 @@ export class BibleParser {
     return text;
   }
 
-  getVersionHtml(bible1: string, bible2: string): string {
-    return this.version === 'NET' ? bible1 : bible2;
+  getVersionHtml(bible1: string, _bible2: string): string {
+    // The API always returns the translation requested as bible1Translation
+    // in bible1, and the API service requests the selected version there
+    return bible1;
   }
 }
 
